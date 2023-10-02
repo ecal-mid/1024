@@ -28,7 +28,7 @@ SMARTMATRIX_ALLOCATE_BACKGROUND_LAYER(bg, TOTAL_WIDTH, TOTAL_HEIGHT, COLOR_DEPTH
 
 void setup() {
 
-	Serial.begin(1000000);
+	Serial.begin(6000000);
 
 	bg.enableColorCorrection(false);
 	matrix.addLayer(&bg);

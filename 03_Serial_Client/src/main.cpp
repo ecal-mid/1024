@@ -5,6 +5,8 @@
 
 #define COLOR_DEPTH 24
 
+
+
 const uint16_t TOTAL_WIDTH = 64;  // Total size of the chained matrices
 const uint16_t TOTAL_HEIGHT = 64;
 const uint16_t kRefreshDepth = 48;  // Valid: 24, 36, 48

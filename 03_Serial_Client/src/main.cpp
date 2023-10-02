@@ -5,14 +5,12 @@
 
 #define COLOR_DEPTH 24
 
-
-
-const uint16_t TOTAL_WIDTH = 64;  // Total size of the chained matrices
-const uint16_t TOTAL_HEIGHT = 64;
+const uint16_t TOTAL_WIDTH = 32;  // Total size of the chained matrices
+const uint16_t TOTAL_HEIGHT = 32;
 const uint16_t kRefreshDepth = 48;  // Valid: 24, 36, 48
 const uint16_t kDmaBufferRows = 4;  // Valid: 2-4
- const uint16_t kPanelType = SM_PANELTYPE_HUB75_64ROW_MOD32SCAN;
-//const uint16_t kPanelType = SM_PANELTYPE_HUB75_32ROW_MOD16SCAN;
+//  const uint16_t kPanelType = SM_PANELTYPE_HUB75_64ROW_MOD32SCAN;
+const uint16_t kPanelType = SM_PANELTYPE_HUB75_32ROW_MOD16SCAN;
 
 const uint8_t NUM_CHANNELS = 3;
 const uint16_t NUM_LEDS = TOTAL_WIDTH * TOTAL_HEIGHT;

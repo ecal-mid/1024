@@ -17,15 +17,15 @@ void setup() {
   // The Processing preprocessor only accepts literal values for size()
   // so we can't do: size(MATRIX_WIDTH, NUM_TILES * MATRIX_HEIGHT);
   // NOTE: the default layout is vertically stacked tiles.
-  size(32, 32);
+  size(32, 32, P3D);
 
   buffer = new byte[MATRIX_WIDTH * MATRIX_HEIGHT * NUM_CHANNELS];
 
   // init serial manually (on Windows):
   // serial = new Serial(this, "COM3");
   // or trough the helper function:
-  //serial = new Serial(this, "/dev/cu.usbserial-02A85E15", 1000000);
-  serial = null;
+  serial = new Serial(this, "/dev/cu.usbmodem93893901", 6000000);
+  
 
   frameRate(20);
 }
@@ -33,11 +33,19 @@ void setup() {
 void draw() {
 
   background(0);
+  
+  translate(width/2, height/2);
+  rotateX(frameCount * 0.021);
+  rotateY(frameCount * 0.022);
+  rotateZ(frameCount * 0.023);
+  noFill();
+  stroke(255);
+  box(16);
 
-  fill(255, 0, 0);
-  stroke(255, 255, 0);
-  float d = map(sin(frameCount * 0.1), -1, 1, 4, 30);
-  ellipse(width/2, height/2, d, d);
+
+
+
+
 
   // Write to the serial port (if open)
   if (serial != null) {

@@ -21,8 +21,8 @@
 
 		function draw() {
 
-			const MATRIX_WIDTH = 32
-			const MATRIX_HEIGHT = 32
+			const MATRIX_WIDTH = 64
+			const MATRIX_HEIGHT = 64
 			const t = 16
 			const offsX = width/2 - MATRIX_WIDTH/2 * t
 			const offsY = height/2 - MATRIX_HEIGHT/2 * t
@@ -32,6 +32,15 @@
 				for (let i=0; i<MATRIX_WIDTH; i++) {
 					const x = i * t + offsX;
 					const y = j * t + offsY;
+
+					const d1 = dist(i, j, MATRIX_WIDTH/2,  MATRIX_HEIGHT/2) * 0.8;
+					const d2 = dist(i, j, mouseX * 0.1, mouseY * 0.1) * 1.1;
+
+					const v1 = map(sin(d1 + frameCount * 0.10), -1, 1, 0, 128)
+					const v2 = map(sin(d2 + frameCount * 0.10), -1, 1, 0, 128)
+
+					fill(v1 + v2)
+
 					rect(x, y, t, t);
 				}
 			}

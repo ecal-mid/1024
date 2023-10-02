@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Simulator</title>
+	<style>
+		body {
+			margin: 0;
+		}
+
+	</style>
+</head>
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+	<script>
+
+		function setup() {
+			createCanvas(windowWidth, windowHeight)
+		}
+
+		function draw() {
+
+			const MATRIX_WIDTH = 32
+			const MATRIX_HEIGHT = 32
+			const t = 16
+			const offsX = width/2 - MATRIX_WIDTH/2 * t
+			const offsY = height/2 - MATRIX_HEIGHT/2 * t
+
+			background(200)
+			for (let j=0; j<MATRIX_HEIGHT; j++) {
+				for (let i=0; i<MATRIX_WIDTH; i++) {
+					const x = i * t + offsX;
+					const y = j * t + offsY;
+					rect(x, y, t, t);
+				}
+			}
+		}
+
+	</script>
+
+</body>
+</html>

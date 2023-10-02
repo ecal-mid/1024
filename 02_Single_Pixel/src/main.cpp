@@ -38,7 +38,7 @@ void setup() {
 
 uint32_t frame = 0;
 void loop() {
-	bg.fillScreen( {255,0,0});
+	bg.fillScreen( {0,0,0});
 
 
 	bg.drawPixel(0, frame % 32, {255, 0, 0});

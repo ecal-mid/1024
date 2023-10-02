@@ -1,5 +1,6 @@
 #include <Arduino.h>
-#include "pico_driver_v5_pinout.h"
+
+#include <MatrixHardware_Teensy4_ShieldV5.h>
 #include <SmartMatrix.h>
 
 #define COLOR_DEPTH 24
@@ -27,16 +28,13 @@ SMARTMATRIX_ALLOCATE_BACKGROUND_LAYER(bg, TOTAL_WIDTH, TOTAL_HEIGHT, COLOR_DEPTH
 
 void setup() {
 
-	Serial.begin(1000000);
-
-	pinMode(PICO_LED_PIN, OUTPUT);
+	Serial.begin();
 
 	bg.enableColorCorrection(false);
 	matrix.addLayer(&bg);
 	matrix.setBrightness(255);
 	matrix.begin();
 
-	bg.fillScreen({0, 0, 0});
 
 }
 

@@ -7,7 +7,7 @@ final int NUM_CHANNELS  = 3; // RGB
 Serial serial;
 byte[] buffer;
 
-PImage img; 
+PImage img;
 
 
 void setup() {
@@ -17,19 +17,19 @@ void setup() {
   img = loadImage("cat.png");
 
   buffer = new byte[MATRIX_WIDTH * MATRIX_HEIGHT * NUM_CHANNELS];
-
-  // init serial manually (on Windows):
-  // serial = new Serial(this, "COM3");
-  // or trough the helper function:
+  
+  println("-- available serial ports --");
   printArray(Serial.list());
 
   try {
+    // init serial manually (on Windows):
+    // serial = new Serial(this, "COM3");
+    // or trough the helper function:
     serial = new Serial(this, "/dev/cu.usbmodem93893901", 6000000);
   }
   catch (Exception e) {
     println(e);
   }
-
 }
 
 void draw() {
@@ -38,7 +38,7 @@ void draw() {
 
   image(img, 0, 0);
 
-  // ---- Write to the serial port (if open) ---------
+  // Write to the serial port (if open)
   if (serial != null) {
     loadPixels();
     int idx = 0;
@@ -51,6 +51,4 @@ void draw() {
     serial.write('*');     // The 'data' command
     serial.write(buffer);  // ...and the pixel values
   }
-  
-  
 }

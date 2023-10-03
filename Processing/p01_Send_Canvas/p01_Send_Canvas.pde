@@ -8,7 +8,7 @@ import processing.serial.*;
 
 final int MATRIX_WIDTH  = 32;
 final int MATRIX_HEIGHT = 32;
-final int NUM_CHANNELS  = 3;
+final int NUM_CHANNELS  = 3; // RGB
 
 Serial serial;
 byte[]buffer;
@@ -18,32 +18,44 @@ void setup() {
   // so we can't do: size(MATRIX_WIDTH, NUM_TILES * MATRIX_HEIGHT);
   // NOTE: the default layout is vertically stacked tiles.
   size(32, 32, P3D);
+  smooth(8);
 
   buffer = new byte[MATRIX_WIDTH * MATRIX_HEIGHT * NUM_CHANNELS];
 
-  // init serial manually (on Windows):
-  // serial = new Serial(this, "COM3");
-  // or trough the helper function:
-  serial = new Serial(this, "/dev/cu.usbmodem93893901", 6000000);
-  
+  buffer = new byte[MATRIX_WIDTH * MATRIX_HEIGHT * NUM_CHANNELS];
 
-  frameRate(20);
+  println("-- available serial ports --");
+  printArray(Serial.list());
+
+  try {
+    // init serial manually (on Windows):
+    // serial = new Serial(this, "COM3");
+    // or trough the helper function:
+    serial = new Serial(this, "/dev/cu.usbmodem93893901", 6000000);
+  }
+  catch (Exception e) {
+    println(e);
+  }
 }
 
 void draw() {
 
   background(0);
-  
+  lights();
   translate(width/2, height/2);
-  rotateX(frameCount * 0.021);
-  rotateY(frameCount * 0.022);
-  rotateZ(frameCount * 0.023);
-  noFill();
-  stroke(255);
-  box(16);
+  rotateX(frameCount * 0.011);
+  rotateY(frameCount * 0.012);
+  rotateZ(frameCount * 0.013);
 
+  noStroke();
 
-
+  float s = 8;
+  fill(200, 200, 0);
+  box(s * 3, s, s);
+  fill(0, 200, 200);
+  box(s, s * 3, s);
+  fill(200, 0, 200);
+  box(7, s, s * 3);
 
 
 

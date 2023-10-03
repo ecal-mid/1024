@@ -19,24 +19,20 @@ void setup() {
 
   sequence = new ArrayList<PImage>();
 
-  PImage spriteSheet = loadImage("font_atlas.png");  
-  
+  PImage spriteSheet = loadImage("font_atlas.png");
+
   int numX = spriteSheet.width/32;
   int numY = spriteSheet.height/32;
-  
-  for (int j=0; j<numY; j++){
-    for (int i=0; i<numX; i++){
+
+  for (int j=0; j<numY; j++) {
+    for (int i=0; i<numX; i++) {
       PImage img = spriteSheet.get(i * 32, j * 32, 32, 32);
       sequence.add(img);
     }
   }
-  
-  
 
   buffer = new byte[MATRIX_WIDTH * MATRIX_HEIGHT * NUM_CHANNELS];
 
-   buffer = new byte[MATRIX_WIDTH * MATRIX_HEIGHT * NUM_CHANNELS];
-  
   println("-- available serial ports --");
   printArray(Serial.list());
 
@@ -44,11 +40,12 @@ void setup() {
     // init serial manually (on Windows):
     // serial = new Serial(this, "COM3");
     // or trough the helper function:
-    serial = new Serial(this, "/dev/cu.usbmodem93893901");
+    serial = new Serial(this, "/dev/cu.usbmodem131734201");
   }
   catch (Exception e) {
     println(e);
   }
+
 }
 
 void keyPressed() {
@@ -62,6 +59,10 @@ void keyPressed() {
 void draw() {
 
   background(0);
+
+  //if (frameCount % 10 == 0) {
+  //  current = (current + 1) % sequence.size();
+  //}
 
   image(sequence.get(current), 0, 0);
 

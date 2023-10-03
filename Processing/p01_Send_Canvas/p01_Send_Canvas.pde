@@ -21,8 +21,8 @@ void setup() {
   smooth(8);
 
   buffer = new byte[MATRIX_WIDTH * MATRIX_HEIGHT * NUM_CHANNELS];
-
-  buffer = new byte[MATRIX_WIDTH * MATRIX_HEIGHT * NUM_CHANNELS];
+  
+  textFont(loadFont("t8.vlw"));
 
   println("-- available serial ports --");
   printArray(Serial.list());
@@ -31,7 +31,7 @@ void setup() {
     // init serial manually (on Windows):
     // serial = new Serial(this, "COM3");
     // or trough the helper function:
-    serial = new Serial(this, "/dev/cu.usbmodem93893901", 6000000);
+    serial = new Serial(this, "/dev/cu.usbmodem131734201");
   }
   catch (Exception e) {
     println(e);
@@ -41,6 +41,7 @@ void setup() {
 void draw() {
 
   background(0);
+  pushMatrix();
   lights();
   translate(width/2, height/2);
   rotateX(frameCount * 0.011);
@@ -56,6 +57,11 @@ void draw() {
   box(s, s * 3, s);
   fill(200, 0, 200);
   box(7, s, s * 3);
+  
+  popMatrix();
+  fill(255);
+  text("FPS:", 0, 8);
+  text(round(frameRate), 0, 16);
 
 
 

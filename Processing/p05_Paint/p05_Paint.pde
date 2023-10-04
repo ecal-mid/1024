@@ -35,8 +35,6 @@ void setup() {
   catch (Exception e) {
     println(e);
   }
-
-  serial =  null;
 }
 
 void keyPressed() {

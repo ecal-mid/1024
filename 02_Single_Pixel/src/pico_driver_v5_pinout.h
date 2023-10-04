@@ -55,10 +55,10 @@
 #define B_PIN GPIO_NUM_19
 #define C_PIN GPIO_NUM_22
 #define D_PIN GPIO_NUM_21
-#define E_PIN -1//GPIO_NUM_18 // v2 -> GPIO 2
+#define E_PIN GPIO_NUM_18 // v2 -> GPIO 2
 
 #define LAT_PIN GPIO_NUM_25
-#define OE_PIN GPIO_NUM_33
+#define OE_PIN  GPIO_NUM_33
 #define CLK_PIN GPIO_NUM_32
 
 #define PICO_LED_PIN GPIO_NUM_0

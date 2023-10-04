@@ -1,20 +1,20 @@
 let port;
-let pg;
-let connectBtn; // ne pas toucher
+let connectBtn;
+let canvas;
+let img1;
+let img2;
+let img3;
 
 const MATRIX_HEIGHT = 32;
 const MATRIX_WIDTH = 32;
-const MATRIX_SCALE = 20;
 const MATRIX_SIZE = MATRIX_HEIGHT * MATRIX_WIDTH;
 
 function setup() {
-    createCanvas(MATRIX_HEIGHT*MATRIX_SCALE, MATRIX_WIDTH*MATRIX_SCALE);
-    pg = createGraphics(MATRIX_HEIGHT, MATRIX_HEIGHT);
+    canvas = createCanvas(MATRIX_HEIGHT, MATRIX_WIDTH);
 
-    pg.noSmooth();
     noSmooth();
-    pg.pixelDensity(1);
-    pg.noStroke();
+    pixelDensity(1);
+    noStroke();
 
     port = createSerial();
 
@@ -27,15 +27,10 @@ function setup() {
 }
 
 function draw() {
-    // ! -> utiliser pg. pour dessiner sur le canvas -> par ex circle -> pg.circle
 
-    //draw test pattern
-    pg.background(10);
-    pg.fill("red");
-    pg.circle(16, 16, frameCount%32);
+    fill("red");
+    background(0);
+    circle(16,16,frameCount%32);
 
-    
-    image(pg, 0, 0, width, height); // draw the graphics buffer to the large screen
     sendPixelData();
-    updateButton();
 }

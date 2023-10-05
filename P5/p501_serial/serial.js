@@ -25,11 +25,11 @@ const { setupSerial, sendPixelData } = (() => {
             const [usedPort] = usedSerialPorts();
             if (usedPort) port.open(usedPort);
 
-            port.port.ondisconnect = () => {
+            // port.port.ondisconnect = () => {
                 
-                // port.close()
-                // try reconnect at interval
-            };
+            //     // port.close()
+            //     // try reconnect at interval
+            // };
 
             connectBtn = createButton('');
             connectBtn.mouseClicked(togglePort);

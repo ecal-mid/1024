@@ -57,9 +57,9 @@
 
 			const circles = [
 
-				{x : Math.sin(time * 0.001),  y : Math.cos(time * 0.003),  r : 0.01},
-				{x : Math.sin(time * 0.002),  y : Math.cos(time * 0.004),  r : 0.01},
-				{x : Math.sin(time * 0.003),  y : Math.cos(time * 0.005),  r : 0.01},
+				{x : Math.sin(time * 0.0011),  y : Math.cos(time * 0.0012),  r : 0.01},
+				{x : Math.sin(time * 0.0012),  y : Math.cos(-time * 0.0013),  r : 0.01},
+				{x : Math.sin(-time * 0.0013),  y : Math.cos(time * 0.0014),  r : 0.01},
 			]
 
 
@@ -72,10 +72,11 @@
 					let dist = 10000
 					for (const c of circles) {
 						const d = length(c.x, c.y, s, t) - c.r;
-						dist = opUnionSmooth(d, dist, 0.3)
+						dist = opUnionSmooth(d, dist, 0.8)
 					}
 
-					const v = dist > 0.5 ? 0 : 255
+					// const v = dist > 0.5 ? 0 : 255
+					const v = (Math.sin(dist * 7 + time * 0.02) * 0.5 + 0.5) * 255
 
 
 					let offs = (i + j * width) * 4

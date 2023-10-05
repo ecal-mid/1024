@@ -28,6 +28,7 @@ SMARTMATRIX_ALLOCATE_BACKGROUND_LAYER(bg, TOTAL_WIDTH, TOTAL_HEIGHT, COLOR_DEPTH
 
 void setup() {
 	// Serial.begin(6000000);
+	// Serial.begin(9600);
 	bg.enableColorCorrection(true);
 	matrix.addLayer(&bg);
 	matrix.setBrightness(255);

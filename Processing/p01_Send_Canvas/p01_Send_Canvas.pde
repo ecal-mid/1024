@@ -31,7 +31,7 @@ void setup() {
     // init serial manually (on Windows):
     // serial = new Serial(this, "COM3");
     // or trough the helper function:
-    serial = new Serial(this, "/dev/cu.usbmodem131734201");
+    serial = new Serial(this, "/dev/tty.usbmodem131734201");
   }
   catch (Exception e) {
     println(e);

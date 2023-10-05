@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Direct Pixel Maniuplation</title>
+	<style>
+		body {
+			background : lightGray;
+		}
+	</style>
+</head>
+<body>
+
+	<canvas></canvas>
+	<script>
+
+		const width = 32
+		const height = 32
+
+		const canvas = document.querySelector('canvas')
+		const ctx = canvas.getContext('2d')
+		canvas.style.width = "480px"
+		canvas.style.height = "480px"
+		canvas.style.fontSmooth = 'none'
+		canvas.style.fontSmooth = 'never'             // non standard!
+		canvas.style['-webkitFontSmoothing'] = 'none' // non standard!
+		canvas.style.imageRendering = 'crisp-edges'   // important: must set both
+		canvas.style.imageRendering = 'pixelated'     // important: must set both
+		canvas.width = width
+		canvas.height = height
+
+		ctx.fillStyle = 'red'
+		ctx.fillRect(0, 0, width, width)
+
+		ctx.fillStyle = 'black'
+		ctx.beginPath()
+		ctx.ellipse(20, 20, 10, 10, 0, 0, Math.PI * 2)
+		ctx.closePath()
+		ctx.fill()
+
+		const id = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.width)
+		const pixels = id.data
+
+		requestAnimationFrame(loop)
+
+		function length(x1, y1, x2, y2) {
+			return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2))
+		}
+
+		function loop(time) {
+			requestAnimationFrame(loop)
+
+			const col = {r:0, g:0, b:0}
+
+			const radius = (Math.sin(time * 0.001) * 0.5 + 0.5) * 15 + 1
+
+			const circles = [
+
+				{x : Math.sin(time * 0.001),  y : Math.cos(time * 0.003),  r : 0.01},
+				{x : Math.sin(time * 0.002),  y : Math.cos(time * 0.004),  r : 0.01},
+				{x : Math.sin(time * 0.003),  y : Math.cos(time * 0.005),  r : 0.01},
+			]
+
+
+			for (let j=0; j<height; j++) {
+				for (let i=0; i<width; i++) {
+
+					const s = i / width * 2 - 1
+					const t = j / width * 2 - 1
+
+					let dist = 10000
+					for (const c of circles) {
+						const d = length(c.x, c.y, s, t) - c.r;
+						dist = opUnionSmooth(d, dist, 0.3)
+					}
+
+					const v = dist > 0.5 ? 0 : 255
+
+
+					let offs = (i + j * width) * 4
+					pixels[offs++] = v
+					pixels[offs++] = v
+					pixels[offs++] = v
+					pixels[offs]   = 255
+				}
+			}
+
+			ctx.putImageData(id, 0, 0)
+		}
+
+		function opIntersect(d1, d2) {
+			return Math.max(d1, d2)
+		}
+
+		function opUnion(d1, d2) {
+			return Math.min(d1, d2)
+		}
+
+		function opSub(d1, d2) {
+			return Math.max(-d1, d2)
+		}
+
+		function opUnionSmooth(d1, d2, k ){
+			const h = Math.max(k - Math.abs(d1 - d2), 0.0) / k
+			return Math.min(d1, d2) - h * h * k * ( 1.0 / 4.0)
+		}
+
+
+	</script>
+
+</body>
+</html>
